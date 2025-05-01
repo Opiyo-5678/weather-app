@@ -1,7 +1,15 @@
-import type { NextConfig } from "next";
+// next.config.js
+/** @type {import('next').NextConfig} */
+module.exports = {
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        fs: false,
+        path: false,
+        os: false,
+      };
+    }
 
-const nextConfig: NextConfig = {
-  /* config options here */
+    return config;
+  },
 };
-
-export default nextConfig;
